@@ -1,4 +1,4 @@
-<project name="lab02" default="ini" basedir=".">
+<project name="JkArgs" default="ini" basedir=".">
 
         <target name="init">
                 <mkdir dir="classes" />
@@ -13,6 +13,11 @@
         </target>
 
         <target name="run" depends="compile">
+                <java classname="pt.ist.ap.a8.JkArgs" >
+                        <classpath path="classes/" />
+                </java>
+        </target>
+        <target name="test" depends="compile">
                 <java classname="pt.ist.ap.a8.JkArgs" >
                         <classpath path="classes/" />
                 </java>
