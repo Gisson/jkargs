@@ -1,0 +1,22 @@
+<project name="lab02" default="ini" basedir=".">
+
+        <target name="init">
+                <mkdir dir="classes" />
+        </target>
+
+        <target name="clean">
+                <delete dir="classes" />
+        </target>
+
+        <target name="compile" depends="init">
+                <javac srcdir="src" destdir="classes"  debug="off"/>
+        </target>
+
+        <target name="run" depends="compile">
+                <java classname="pt.ist.ap.a8.JkArgs" >
+                        <classpath path="classes/" />
+                </java>
+        </target>
+
+
+</project>
