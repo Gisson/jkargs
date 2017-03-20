@@ -1,0 +1,15 @@
+#!/bin/bash
+
+CLASSDIR="classes/main/pt/ist/ap/a8/Tests"
+
+if [[ ! -d $CLASSDIR ]];then
+  if [[ ! $(ant compile) -eq 0 ]];then
+    echo "Some really big shit happen; Check output bro!"
+    exit
+  fi
+fi  
+
+for i in $(ls $CLASSDIR | grep class  | rev | cut -c 6- | rev);do
+  ant run -Darg0=$i
+done
+  
