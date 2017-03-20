@@ -2,6 +2,7 @@
 
         <target name="init">
                 <mkdir dir="classes" />
+				<mkdir dir="lib" />
         </target>
 
         <target name="clean">
@@ -17,6 +18,12 @@
                         <classpath path="classes/" />
                 </java>
         </target>
+        <target name="jar" depends="compile">
+                <jar destfile="./JkArgs" basedir="classes">
+					<zipgroupfileset dir="lib" includes="*.jar" />
+                </jar>
+        </target>
+
         <target name="test" depends="compile">
                 <java classname="pt.ist.ap.a8.JkArgs" >
                         <classpath path="classes/" />
