@@ -26,10 +26,10 @@ public class JkArgs{
 
 
   //public static String PATTERN="([A-z])*(?:(=)?)(\\\"([A-z])*\\\"|([0-9])+)*(?:(,)?)";
-  public static String PATTERN_ATTR_NAME="([A-z])*(?=(=)?)(\"([A-z])*\"";
+  //public static String PATTERN_ATTR_NAME="([A-z])*(?=(=)?)(\"([A-z])*\"";
   public static HashMap<Method,List<Argument>> keywordedMeths=new HashMap<Method,List<Argument>>();
-  public static HashMap<SimpleEntry<Class,Type[]>,String> keywordedConsts=
-  new HashMap<SimpleEntry<Class,Type[]>,String>();
+  public static HashMap<SimpleEntry<Class,Type[]>,List<Argument>> keywordedConsts=
+  new HashMap<SimpleEntry<Class,Type[]>,List<Argument>>();
   private static final Logger LOGGER=Logger.getLogger("JkLogger");
 
   public static void main(String[] argv){
@@ -39,7 +39,7 @@ public class JkArgs{
     try{
       for(Constructor<?> c : Class.forName(argv[0]).getConstructors()){
         SimpleEntry<Class,Type[]> entry=new SimpleEntry<Class,Type[]>(c.getDeclaringClass(),c.getGenericParameterTypes());
-        keywordedConsts.put(entry,((KeywordArgs)(c.getAnnotation(KeywordArgs.class))).value());
+        keywordedConsts.put(entry,parseKeys(((KeywordArgs)(c.getAnnotation(KeywordArgs.class))).value()));
 
         LOGGER.log(Level.INFO,"Trying constructor "+c.getDeclaringClass());
       }
@@ -62,23 +62,29 @@ public class JkArgs{
     }
 
     //Print all the stuff....for debugging purposes
-    for(Map.Entry<SimpleEntry<Class,Type[]>,String> entry : keywordedConsts.entrySet()){
+    for(Map.Entry<SimpleEntry<Class,Type[]>,List<Argument>> entry : keywordedConsts.entrySet()){
       LOGGER.log(Level.INFO,"Dumping constructors found");
       LOGGER.log(Level.INFO, "Name in hashmap "+entry.getKey()+" And keyword args are \""+
       entry.getValue()+"\"");
     }
   }
 
-  public static void applyKeyArgs(CtClass ctClass, CtMethod ctMethod){
+  //public static void applyKeyArgs(CtClass ctClass, CtMethod ctMethod){
+//
+  //}
 
-  }
-
+  //Dummy implementation of a parse. Some1 change this if possible... ty <3 you
   public static List<Argument> parseKeys(String keys){
-    Pattern r = Pattern.compile(JkArgs.PATTERN_ATTR_NAME);
-    Matcher m = r.matcher(keys);
-    if(m.find()){
-      JkArgs.LOGGER.log(Level.INFO,"Got this name "+m.group(0));
+    String[] allArgs=keys.split(",");
+    ArrayList<Argument> args=new ArrayList<Argument>();
+    for(String s : allArgs){
+      LOGGER.log(Level.INFO, "Found mr "+s);
+      if(s.contains("=")){
+        args.add(new Argument(s.split("=")[0], s.split("=")[1]));
+      }else{
+        args.add(new Argument(s, null));
+      }
     }
-  return new ArrayList<Argument>();
+  return args;
   }
 }

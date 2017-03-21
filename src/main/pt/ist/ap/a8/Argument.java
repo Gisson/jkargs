@@ -8,4 +8,8 @@ public class Argument{
 
 	public String getName(){return _name;}
 	public Object getValue(){return _value;}
+
+	public String toString(){
+		return "Name "+getName()+",Value "+getValue();
+	}
 }
