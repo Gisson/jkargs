@@ -1,25 +1,37 @@
 <project name="JkArgs" default="ini" basedir=".">
+<property name="src" value="src" />
+<property name="lib" value="lib" />
+		<path id="classpath">
+			<fileset dir="${lib}" includes="**/*.jar" />
+		</path>
+
 
         <target name="init">
                 <mkdir dir="classes" />
-				<mkdir dir="lib" />
-				<mkdir dir="output"/>
+				<mkdir dir="${lib}" />
         </target>
 
         <target name="clean">
                 <delete dir="classes" />
-				<delete dir="output"/>
         </target>
 
         <target name="compile" depends="init">
-                <javac srcdir="src" destdir="classes"  debug="off"/>
+                <javac srcdir="${src}" destdir="classes"  debug="off" classpath="${classpath}" />
         </target>
 
         <target name="run" depends="compile">
                 <java classname="pt.ist.ap.a8.JkArgs" >
-                        <classpath path="classes/" />
+                        <classpath path="${classpath}" />
                 </java>
         </target>
-
+		<target name="jar" depends="compile">
+			<jar destfile="jkargs.jar" basedir="classes">
+				<zipgroupfileset dir="lib" includes="**/lib/*.jar" />
+				<manifest>
+					<attribute name="Main-class" value="pt.ist.ap.a8.JkArgs" />
+					<attribute name="Class-Path" value="${classpath}" />
+				</manifest>
+			</jar>
+		</target>
 
 </project>
