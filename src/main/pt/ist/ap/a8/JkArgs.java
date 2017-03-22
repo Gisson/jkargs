@@ -17,10 +17,14 @@ import java.util.logging.Level;
 
 //import javassist
 import javassist.*;
+import javassist.expr.*;
 
 //regex stuff
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+//import for translator
+import pt.ist.ap.a8.translators.KeywordTranslator;
 
 public class JkArgs{
 
@@ -37,7 +41,15 @@ public class JkArgs{
     LOGGER.log(Level.INFO,"So it begins...");
 
     try{
-      for(Constructor<?> c : Class.forName(argv[0]).getConstructors()){
+      Translator translator = new KeywordTranslator();
+      ClassPool pool = ClassPool.getDefault();
+      Loader classLoader = new Loader();
+      classLoader.addTranslator(pool, translator);
+      String[] restArgs=new String[argv.length-1];
+      System.arraycopy(argv, 1, restArgs, 0, restArgs.length);
+      classLoader.run(argv[0],restArgs);
+
+/*        for(Constructor<?> c : Class.forName(argv[0]).getConstructors()){
         SimpleEntry<Class,Type[]> entry=new SimpleEntry<Class,Type[]>(c.getDeclaringClass(),c.getGenericParameterTypes());
         keywordedConsts.put(entry,parseKeys(((KeywordArgs)(c.getAnnotation(KeywordArgs.class))).value()));
 
@@ -49,10 +61,11 @@ public class JkArgs{
 
           keywordedMeths.put(m,parseKeys(((KeywordArgs)(m.getAnnotation(KeywordArgs.class))).value()));
         }
-      }
+      }*/
     }catch(Exception e){
       e.printStackTrace();
-    }
+    }catch( Throwable t){
+	}
 
     //Print all the stuff....for debugging purposes
     for(Map.Entry<Method,List<Argument>> entry : keywordedMeths.entrySet()){
@@ -71,7 +84,7 @@ public class JkArgs{
 
   //public static void applyKeyArgs(CtClass ctClass, CtMethod ctMethod){
 //
-  //}
+//  }
 
   //Dummy implementation of a parse. Some1 change this if possible... ty <3 you
   public static List<Argument> parseKeys(String keys){
