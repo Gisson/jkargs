@@ -21,7 +21,7 @@
 
         <target name="run" depends="compile">
                 <java classname="pt.ist.ap.a8.JkArgs" >
-                        <classpath path="classpath" />
+                        <classpath path="classes/" />
 				<arg value="${arg0}" />
                 </java>
         </target>
