@@ -2,13 +2,13 @@
 <property name="src" value="src" />
 <property name="lib" value="lib" />
 		<path id="classpath">
-			<fileset dir="${lib}" includes="**/*.jar" />
+			<pathelement location="classes/" />
+			<pathelement location="lib/javassist/javassist.jar" />
 		</path>
 
 
         <target name="init">
                 <mkdir dir="classes" />
-				<mkdir dir="${lib}" />
         </target>
 
         <target name="clean">
@@ -16,20 +16,20 @@
         </target>
 
         <target name="compile" depends="init">
-                <javac srcdir="${src}" destdir="classes"  debug="off" classpath="${classpath}" />
+                <javac srcdir="${src}" destdir="classes"  debug="off" classpathref="classpath" />
         </target>
 
         <target name="run" depends="compile">
                 <java classname="pt.ist.ap.a8.JkArgs" >
-                        <classpath path="${classpath}" />
+                        <classpath path="classpath" />
+				<arg value="${arg0}" />
                 </java>
         </target>
 		<target name="jar" depends="compile">
 			<jar destfile="jkargs.jar" basedir="classes">
-				<zipgroupfileset dir="lib" includes="**/lib/*.jar" />
+				<zipgroupfileset dir="lib/javassist" includes="*.jar" />
 				<manifest>
 					<attribute name="Main-class" value="pt.ist.ap.a8.JkArgs" />
-					<attribute name="Class-Path" value="${classpath}" />
 				</manifest>
 			</jar>
 		</target>
