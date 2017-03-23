@@ -25,7 +25,7 @@
         <target name="testsCompile" depends="init">
 			<javac srcdir="Tests/src" destdir="Tests/classes" debug="off" classpathref="testscp"/>
         </target>
-        <target name="test" depends="compile,testsCompile">
+        <target name="test" depends="compile">
 			<!--<exec executable="test"/>-->
         </target>
 
