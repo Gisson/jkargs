@@ -1,4 +1,4 @@
-<project name="KeyConstructors" default="ini" basedir=".">
+<project name="KeyConstructors" default="compile" basedir=".">
 <property name="src" value="src" />
 <property name="lib" value="lib" />
 		<path id="classpath">
