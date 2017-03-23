@@ -63,6 +63,7 @@ public class JkArgs{
         }
       }*/
     }catch(Exception e){
+		LOGGER.log(Level.INFO,"ALLU ACKBAR!!!");
       e.printStackTrace();
     }catch( Throwable t){
 	}
