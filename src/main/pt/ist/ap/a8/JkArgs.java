@@ -63,9 +63,11 @@ public class JkArgs{
         }
       }*/
     }catch(Exception e){
-		LOGGER.log(Level.INFO,"ALLU ACKBAR!!!");
+		LOGGER.log(Level.SEVERE,"ALLU ACKBAR!!!");
       e.printStackTrace();
     }catch( Throwable t){
+		LOGGER.log(Level.SEVERE,"ALLU SNACKBAR!!!");
+		t.printStackTrace();
 	}
 
     //Print all the stuff....for debugging purposes

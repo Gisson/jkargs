@@ -2,7 +2,7 @@ package pt.ist.ap.a8;
 
 public class Argument{
 	private String _name;
-	private Object _value;
+	private Object _value=null;
 
 	public Argument(String name, Object value){_name=name;_value=value;}
 

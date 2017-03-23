@@ -42,7 +42,8 @@ public class KeywordTranslator implements Translator{
       try{
         LOGGER.log(Level.INFO, "Parsing class: "+c.getName());
         List<Argument> args=parseKeys(getKeywordAnnotations(c).value());
-		applyKeyArgs(args,c);
+        LOGGER.log(Level.INFO, "Applying all the found arguments for  "+c.getName());
+		applyKeyArgs(args,c,ctClass);
 
       }catch(RuntimeException e){
         LOGGER.log(Level.SEVERE,"Cant find keywords class!!!");
@@ -51,8 +52,23 @@ public class KeywordTranslator implements Translator{
 
   }
 
-  private void applyKeyArgs(List<Argument> args,CtConstructor c){
-
+  private void applyKeyArgs(List<Argument> args,CtConstructor c,CtClass ctClass){
+	String name=ctClass.getName();
+	String template="{ ";
+	for(Argument a: args){
+		template+="$0."+a.getName();
+		if(a.getValue()!=null){
+			template+="="+a.getValue();
+		}
+		template+=";";
+	}
+	template+="}";
+	try{
+		c.insertBeforeBody(template);
+	}catch(CannotCompileException e){
+		LOGGER.log(Level.INFO,"HMmm it did not compile....Retry I guess....");
+		throw new RuntimeException();
+	}
   }
 
   //Dummy implementation of a parse. Some1 change this if possible... ty <3 you
