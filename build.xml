@@ -1,9 +1,10 @@
-<project name="JkArgs" default="ini" basedir=".">
+<project name="KeyConstructors" default="ini" basedir=".">
 <property name="src" value="src" />
 <property name="lib" value="lib" />
 		<path id="classpath">
 			<pathelement location="classes/" />
 			<pathelement location="lib/javassist/javassist.jar" />
+			<pathelement location="Tests/classes/" />
 		</path>
 		<path id="testscp">
 			<pathelement location="classes/" />
@@ -30,7 +31,7 @@
         </target>
 
         <target name="run" depends="compile,testsCompile">
-                <java classname="pt.ist.ap.a8.JkArgs" >
+                <java classname="ist.meic.pa.KeyConstructors" >
                     <classpath>
                         <path refid="classpath" />
                     </classpath>
@@ -38,10 +39,10 @@
                 </java>
         </target>
 		<target name="jar" depends="compile">
-			<jar destfile="lib/jkargs/jkargs.jar" basedir="classes">
+			<jar destfile="lib/jkargs/KeyConstructors.jar" basedir="classes">
 				<zipgroupfileset dir="lib/javassist" includes="*.jar" />
 				<manifest>
-					<attribute name="Main-class" value="pt.ist.ap.a8.JkArgs" />
+					<attribute name="Main-class" value="ist.meic.pa.KeyConstructors" />
 				</manifest>
 			</jar>
 		</target>

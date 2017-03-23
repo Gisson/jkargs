@@ -1,4 +1,4 @@
-import pt.ist.ap.a8.annotations.KeywordArgs;
+import ist.meic.pa.annotations.KeywordArgs;
 
 class ExtendedWidget extends Widget {
 	String name;

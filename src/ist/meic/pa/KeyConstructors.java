@@ -1,10 +1,10 @@
-package pt.ist.ap.a8;
+package ist.meic.pa;
 
 import java.lang.annotation.*;
 import java.lang.reflect.*;
 import java.util.HashMap;
-import pt.ist.ap.a8.annotations.KeywordArgs;
-import pt.ist.ap.a8.Argument;
+import ist.meic.pa.annotations.KeywordArgs;
+import ist.meic.pa.Argument;
 
 import java.util.Map;
 import java.util.AbstractMap.SimpleEntry;
@@ -24,9 +24,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //import for translator
-import pt.ist.ap.a8.translators.KeywordTranslator;
+import ist.meic.pa.translators.KeywordTranslator;
 
-public class JkArgs{
+public class KeyConstructors{
 
 
   //public static String PATTERN="([A-z])*(?:(=)?)(\\\"([A-z])*\\\"|([0-9])+)*(?:(,)?)";
@@ -51,15 +51,15 @@ public class JkArgs{
 
 /*        for(Constructor<?> c : Class.forName(argv[0]).getConstructors()){
         SimpleEntry<Class,Type[]> entry=new SimpleEntry<Class,Type[]>(c.getDeclaringClass(),c.getGenericParameterTypes());
-        keywordedConsts.put(entry,parseKeys(((KeywordArgs)(c.getAnnotation(KeywordArgs.class))).value()));
+        keywordedConsts.put(entry,parseKeys(((KeywordConstructors)(c.getAnnotation(KeywordConstructors.class))).value()));
 
         LOGGER.log(Level.INFO,"Trying constructor "+c.getDeclaringClass());
       }
 
       for(Method m : Class.forName(argv[0]).getDeclaredMethods()){
-        if(m.isAnnotationPresent(KeywordArgs.class)){
+        if(m.isAnnotationPresent(KeywordConstructors.class)){
 
-          keywordedMeths.put(m,parseKeys(((KeywordArgs)(m.getAnnotation(KeywordArgs.class))).value()));
+          keywordedMeths.put(m,parseKeys(((KeywordConstructors)(m.getAnnotation(KeywordConstructors.class))).value()));
         }
       }*/
     }catch(Exception e){

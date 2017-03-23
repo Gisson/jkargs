@@ -1,4 +1,4 @@
-package pt.ist.ap.a8;
+package ist.meic.pa;
 
 public class Argument{
 	private String _name;

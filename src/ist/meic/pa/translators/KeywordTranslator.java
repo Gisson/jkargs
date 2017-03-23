@@ -1,20 +1,20 @@
-package pt.ist.ap.a8.translators;
+package ist.meic.pa.translators;
 
 import javassist.*;
 
-import pt.ist.ap.a8.annotations.KeywordArgs;
+import ist.meic.pa.annotations.KeywordArgs;
 import java.util.List;
 import java.util.ArrayList;
 
 //exceptions
-import pt.ist.ap.a8.exceptions.*;
+import ist.meic.pa.exceptions.*;
 
 //import Logger
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 //Auxiliary class
-import pt.ist.ap.a8.Argument;
+import ist.meic.pa.Argument;
 
 public class KeywordTranslator implements Translator{
 

@@ -1,10 +1,10 @@
-import pt.ist.ap.a8.annotations.KeywordArgs;
+import ist.meic.pa.annotations.KeywordArgs;
 
 public class KeyPlaces {
 	String first;
 	String second;
 	String third;
-	
+
 	@KeywordArgs("first=\"Lordran\",second=\"Drangleic\",third=\"Lothric\"")
 	public KeyPlaces(Object... args) {}
 

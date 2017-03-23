@@ -11,7 +11,7 @@ export CLASSPATH="$BASEDIR/jkargs.jar:$BASEDIR/classes/:$BASEDIR/Tests/src/:$BAS
 
 ant clean &>/dev/null;ant compile &>/dev/null;ant testsCompile &>/dev/null
 
-for i in $(ls Tests/classes/Test* | rev | cut -b 7- | rev|cut -b 15-);do echo "Going for $i"; java pt.ist.ap.a8.JkArgs $i &>Tests/output/$i ;colordiff Tests/output/$i Tests/expected/out$(echo $i | cut -b 5-).txt ;done
+for i in $(ls Tests/classes/Test* | rev | cut -b 7- | rev|cut -b 15-);do echo "Going for $i"; java ist.meic.pa.KeyConstructors $i &>Tests/output/$i ;colordiff Tests/output/$i Tests/expected/out$(echo $i | cut -b 5-).txt ;done
 
 exit 0;
 

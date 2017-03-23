@@ -1,4 +1,4 @@
-package pt.ist.ap.a8.annotations;
+package ist.meic.pa.annotations;
 
 import java.lang.annotation.*;
 
