@@ -1,22 +1,9 @@
 #!/bin/bash
 
-CLASSDIR="classes/main/pt/ist/ap/a8/Tests"
+export CLASSPATH=$(pwd)/Tests/classes/*:$(pwd)/lib/javassist/javassist.jar:$(pwd)/classes/
 
-if [[ ! -d $CLASSDIR ]];then
-  if [[ ! $(ant compile) -eq 0 ]];then
-    echo "Some really big shit happen; Check output bro!"
-    exit
-  fi
-fi  
-count=0
-testsRun=0
-for i in $(ls $CLASSDIR | grep class  | rev | cut -c 6- | rev);do
-  echo "Running test class $i"
-  if [[ $(ant run -Darg0=$i) -eq 0 ]];then
-    count=$((count+1))
-  fi
-  testsRun=$((testsRun+1))
-done
+ant clean;ant compile;ant testsCompile
 
-echo "Tests are over. Project passed $count tests out of $testsRun"
+for i in $(ls Tests/classes/Test* | rev | cut -b 7- | rev|cut -b 15-);do echo -e "starting test for $i\n";java -jar lib/jkargs/jkargs.jar $i;done
+
   
