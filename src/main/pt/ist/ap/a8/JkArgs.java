@@ -37,7 +37,7 @@ public class JkArgs{
   private static final Logger LOGGER=Logger.getLogger("JkLogger");
 
   public static void main(String[] argv){
-    LOGGER.setLevel(Level.INFO);
+    LOGGER.setLevel(Level.SEVERE);
     LOGGER.log(Level.INFO,"So it begins...");
 
     try{
@@ -63,7 +63,7 @@ public class JkArgs{
         }
       }*/
     }catch(Exception e){
-		LOGGER.log(Level.SEVERE,"ALLU ACKBAR!!!");
+		LOGGER.log(Level.SEVERE,"ALLU ACKBAR!!! ┻ricardo┻ ︵﻿ ¯\\(ツ)/¯ ︵ ┻touret┻");
       e.printStackTrace();
     }catch( Throwable t){
 		LOGGER.log(Level.SEVERE,"ALLU SNACKBAR!!!");

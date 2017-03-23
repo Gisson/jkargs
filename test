@@ -1,9 +1,16 @@
 #!/bin/bash
 
-export CLASSPATH=$(pwd)/Tests/classes/*:$(pwd)/lib/javassist/javassist.jar:$(pwd)/classes/
+#export CLASSPATH=$(pwd)/Tests/classes/*:$(pwd)/lib/javassist/javassist.jar:$(pwd)/classes/
 
-ant clean;ant compile;ant testsCompile
+#Change this to the basedir of your project
+BASEDIR="$HOME/4ano/PAVA/projects/p1"
 
-for i in $(ls Tests/classes/Test* | rev | cut -b 7- | rev|cut -b 15-);do echo -e "starting test for $i\n";java -jar lib/jkargs/jkargs.jar $i;done
+
+#This is retarded blame turii
+export CLASSPATH="$BASEDIR/jkargs.jar:$BASEDIR/classes/:$BASEDIR/Tests/src/:$BASEDIR/Tests/classes:$BASEDIR/Tests/classes/:$BASEDIR/Tests/classes/*:$BASEDIR/classes/pt/ist/ap/a8:$BASEDIR/lib/javassist/javassist.jar"
+
+ant clean &>/dev/null;ant compile &>/dev/null;ant testsCompile &>/dev/null
+
+for i in $(ls Tests/classes/Test* | rev | cut -b 7- | rev|cut -b 15-);do echo "Going for $i"; java pt.ist.ap.a8.JkArgs $i &>Tests/output/$i ;colordiff Tests/output/$i Tests/expected/out$(echo $i | cut -b 5-).txt ;done
 
   

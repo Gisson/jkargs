@@ -32,7 +32,7 @@
 			<exec executable="test"/>
         </target>
 
-        <target name="run" depends="compile">
+        <target name="run" depends="compile,testsCompile">
                 <java classname="pt.ist.ap.a8.JkArgs" >
                     <classpath>
                         <path refid="classpath" />
