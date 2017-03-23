@@ -63,24 +63,31 @@ public class KeywordTranslator implements Translator{
 		}
 		template+=";";
 	}
-/*Class<?> current = yourClass;
-while(current.getSuperclass()!=null){ // we don't want to process Object.class
-    // do something with current's fields
-    current = current.getSuperclass();
-}*/
-	template+="java.lang.reflect.Field f=null;for( int i=0;i<$1.length;i+=2){ Class current=this.getClass();";
-	template+="try{  f=this.getClass().getDeclaredField((String)$1[i]);f.setAccessible(true);  f.set($0,$1[i+1]); }";
-	template+="catch(java.lang.NoSuchFieldException e){"+
-  "try{while(current.getSuperclass()!=null || f==null){"+
-    "try{current=current.getSuperclass();"+
-      "f=current.getDeclaredField((String)$1[i]);"+
-      "f.setAccessible(true);"+
-      "f.set($0,$1[i+1]);"+
-      "}catch(NoSuchFieldException e2){"+
-      "continue;}}}catch(NullPointerException e3){throw new RuntimeException(\"Unrecognized keyword: \"+$1[i]);} }";
-	template+="catch(Exception e){  throw new RuntimeException(\"FODASSE TOURET\");}   }";
+	template+=
+	"java.lang.reflect.Field f=null;"+
+	"for( int i=0;i<$1.length;i+=2){"+ 
+			"Class current=this.getClass();"+
+			"try{"+
+				"f=this.getClass().getDeclaredField((String)$1[i]);"+
+				"f.setAccessible(true);  f.set($0,$1[i+1]);"+
+			"}catch(java.lang.NoSuchFieldException e){"+
+				"try{"+
+					"while(current.getSuperclass()!=null || f==null){"+
+						"try{current=current.getSuperclass();"+
+							"f=current.getDeclaredField((String)$1[i]);"+
+							"f.setAccessible(true);"+
+							"f.set($0,$1[i+1]);"+
+						"}catch(NoSuchFieldException e2){"+
+							"continue;"+
+						"}"+
+					"}"+
+				"}catch(NullPointerException e3){"+
+					"throw new RuntimeException(\"Unrecognized keyword: \"+$1[i]);} "+
+			"}"+
+	"}";
 	template+="}";
 
+	
 	try{
 		c.insertBeforeBody(template);
 	}catch(CannotCompileException e){

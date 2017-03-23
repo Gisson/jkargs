@@ -1,4 +1,4 @@
-package pt.ist.ap.a8.exceptions;
+package ist.meic.pa.exceptions;
 
 import java.lang.RuntimeException;
 
