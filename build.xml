@@ -29,7 +29,7 @@
 			<javac srcdir="Tests/src" destdir="Tests/classes" debug="off" classpathref="testscp"/>
         </target>
         <target name="test" depends="compile,testsCompile">
-			<exec executable="test"/>
+			<!--<exec executable="test"/>-->
         </target>
 
         <target name="run" depends="compile">
