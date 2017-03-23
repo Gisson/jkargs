@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+BASEDIR=$(pwd)
+
+cd $(mktemp -d);mkdir -p g08/lib/javassist
+cp -r $BASEDIR/src g08/
+cp  $BASEDIR/lib/javassist/javassist.jar g08/lib/javassist
+cp $BASEDIR/build.xml g08/
+cd g08
+ant jar
+ant clean
+cd ..
+
+zip -r project.zip g08
+mv project.zip $BASEDIR

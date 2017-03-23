@@ -1,4 +1,4 @@
-<project name="KeyConstructors" default="compile" basedir=".">
+<project name="KeyConstructors" default="jar" basedir=".">
 <property name="src" value="src" />
 <property name="lib" value="lib" />
 		<path id="classpath">
@@ -39,7 +39,7 @@
                 </java>
         </target>
 		<target name="jar" depends="compile">
-			<jar destfile="lib/jkargs/KeyConstructors.jar" basedir="classes">
+			<jar destfile="KeyConstructors.jar" basedir="classes">
 				<zipgroupfileset dir="lib/javassist" includes="*.jar" />
 				<manifest>
 					<attribute name="Main-class" value="ist.meic.pa.KeyConstructors" />
