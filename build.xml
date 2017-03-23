@@ -4,7 +4,6 @@
 		<path id="classpath">
 			<pathelement location="classes/" />
 			<pathelement location="lib/javassist/javassist.jar" />
-			<pathelement location="Tests/classes/" />
 		</path>
 		<path id="testscp">
 			<pathelement location="classes/" />
@@ -14,12 +13,10 @@
 
         <target name="init">
                 <mkdir dir="classes" />
-				<mkdir dir="Tests/classes" />
         </target>
 
         <target name="clean">
                 <delete dir="classes" />
-				<delete dir="Tests/classes/"/>
         </target>
 
         <target name="compile" depends="init">
@@ -28,8 +25,8 @@
         <target name="testsCompile" depends="init">
 			<javac srcdir="Tests/src" destdir="Tests/classes" debug="off" classpathref="testscp"/>
         </target>
-        <target name="test" depends="compile,testsCompile">
-			<exec executable="test"/>
+        <target name="test" depends="compile">
+			<!--<exec executable="test"/>-->
         </target>
 
         <target name="run" depends="compile,testsCompile">
