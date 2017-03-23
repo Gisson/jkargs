@@ -4,21 +4,32 @@
 		<path id="classpath">
 			<pathelement location="classes/" />
 			<pathelement location="lib/javassist/javassist.jar" />
+			<pathelement location="Tests/classes/" />
+		</path>
+		<path id="testscp">
+			<pathelement location="classes/" />
+			<pathelement location="lib/javassist/javassist.jar" />
 		</path>
 
 
         <target name="init">
                 <mkdir dir="classes" />
+				<mkdir dir="Tests/classes" />
         </target>
 
         <target name="clean">
                 <delete dir="classes" />
+				<delete dir="Tests/classes/"/>
         </target>
 
         <target name="compile" depends="init">
                 <javac srcdir="${src}" destdir="classes"  debug="off" classpathref="classpath" />
         </target>
-        <target name="test" depends="compile">
+        <target name="testsCompile" depends="init">
+			<javac srcdir="Tests/src" destdir="Tests/classes" debug="off" classpathref="testscp"/>
+        </target>
+        <target name="test" depends="compile,testsCompile">
+			<exec executable="test"/>
         </target>
 
         <target name="run" depends="compile">
@@ -30,7 +41,7 @@
                 </java>
         </target>
 		<target name="jar" depends="compile">
-			<jar destfile="jkargs.jar" basedir="classes">
+			<jar destfile="lib/jkargs/jkargs.jar" basedir="classes">
 				<zipgroupfileset dir="lib/javassist" includes="*.jar" />
 				<manifest>
 					<attribute name="Main-class" value="pt.ist.ap.a8.JkArgs" />
