@@ -18,6 +18,8 @@
         <target name="compile" depends="init">
                 <javac srcdir="${src}" destdir="classes"  debug="off" classpathref="classpath" />
         </target>
+        <target name="test" depends="compile">
+        </target>
 
         <target name="run" depends="compile">
                 <java classname="pt.ist.ap.a8.JkArgs" >
