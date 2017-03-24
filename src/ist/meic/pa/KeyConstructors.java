@@ -63,7 +63,7 @@ public class KeyConstructors{
         }
       }*/
     }catch(Exception e){
-		LOGGER.log(Level.SEVERE,"ALLU ACKBAR!!! ┻ricardo┻ ︵﻿ ¯\\(ツ)/¯ ︵ ┻touret┻");
+		LOGGER.log(Level.INFO,"ALLU ACKBAR!!! ┻ricardo┻ ︵﻿ ¯\\(ツ)/¯ ︵ ┻touret┻");
       e.printStackTrace();
     }catch( Throwable t){
 		LOGGER.log(Level.SEVERE,"ALLU SNACKBAR!!!");

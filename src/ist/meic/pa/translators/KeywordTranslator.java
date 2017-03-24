@@ -65,25 +65,22 @@ public class KeywordTranslator implements Translator{
 	}
 	template+=
 	"java.lang.reflect.Field f=null;"+
-	"for( int i=0;i<$1.length;i+=2){"+ 
-			"Class current=this.getClass();"+
+	"for(int i=0;i<$1.length;i+=2){"+ 
+		"Class current=this.getClass();"+
+		"while(current!=null || f==null){"+
 			"try{"+
-				"f=this.getClass().getDeclaredField((String)$1[i]);"+
-				"f.setAccessible(true);  f.set($0,$1[i+1]);"+
-			"}catch(java.lang.NoSuchFieldException e){"+
-				"try{"+
-					"while(current.getSuperclass()!=null || f==null){"+
-						"try{current=current.getSuperclass();"+
-							"f=current.getDeclaredField((String)$1[i]);"+
-							"f.setAccessible(true);"+
-							"f.set($0,$1[i+1]);"+
-						"}catch(NoSuchFieldException e2){"+
-							"continue;"+
-						"}"+
-					"}"+
-				"}catch(NullPointerException e3){"+
-					"throw new RuntimeException(\"Unrecognized keyword: \"+$1[i]);} "+
+				"f=current.getDeclaredField((String)$1[i]);"+
+			"}catch(NullPointerException e3){"+
+				"throw new RuntimeException(\"Unrecognized keyword: \"+$1[i]);"+
+			"}catch(NoSuchFieldException e2){"+
+				"current=current.getSuperclass();"+
+				"continue;"+
 			"}"+
+			"f.setAccessible(true);"+
+			"f.set($0,$1[i+1]);"+
+			"f.setAccessible(false);"+
+			"current=current.getSuperclass();"+
+		"}"+
 	"}";
 	template+="}";
 
