@@ -15,6 +15,7 @@
         <target name="init">
                 <mkdir dir="classes" />
                 <mkdir dir="Tests/classes" />
+                <mkdir dir="Tests/src" />
         </target>
 
         <target name="clean">
