@@ -14,10 +14,12 @@
 
         <target name="init">
                 <mkdir dir="classes" />
+                <mkdir dir="Tests/classes" />
         </target>
 
         <target name="clean">
                 <delete dir="classes" />
+                <delete dir="Tests/classes" />
         </target>
 
         <target name="compile" depends="init">
