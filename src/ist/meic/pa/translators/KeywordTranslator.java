@@ -64,10 +64,10 @@ public class KeywordTranslator implements Translator{
 		template+=";";
 	}
 	template+=
-	"java.lang.reflect.Field f=null;"+
 	"for(int i=0;i<$1.length;i+=2){"+ 
+	"java.lang.reflect.Field f=null;"+
 		"Class current=this.getClass();"+
-		"while(current!=null || f==null){"+
+		"while(current!=null && f==null){"+
 			"try{"+
 				"f=current.getDeclaredField((String)$1[i]);"+
 			"}catch(NullPointerException e3){"+
@@ -79,8 +79,7 @@ public class KeywordTranslator implements Translator{
 			"f.setAccessible(true);"+
 			"f.set($0,$1[i+1]);"+
 			"f.setAccessible(false);"+
-			"current=current.getSuperclass();"+
-		"}"+
+		"}"+"if(current==null)throw new RuntimeException(\"Unrecognized keyword: \"+$1[i]);"+
 	"}";
 	template+="}";
 
